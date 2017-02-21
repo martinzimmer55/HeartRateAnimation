@@ -18,6 +18,14 @@ public class Home extends MyActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setHeader("Home");
+        TextView t1 = (TextView) findViewById(R.id.t1);
+        TextView t2 = (TextView) findViewById(R.id.t2);
+        TextView t3 = (TextView) findViewById(R.id.t3);
+        TextView t4 = (TextView) findViewById(R.id.t4);
+        t1.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
+        t2.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
+        t3.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
+        t4.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
     }
 
     public void manual(View v) {
@@ -48,7 +56,7 @@ public class Home extends MyActivity {
         LayoutInflater mInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         title = (TextView) mCustomView.findViewById(R.id.textTitle);
-//        title.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_BEBAS));
+        title.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
         title.setText(header_title);
 //        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.header));
         //to display custom layout with same BG color

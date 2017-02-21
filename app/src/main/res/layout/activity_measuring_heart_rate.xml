@@ -30,10 +30,11 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/t1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="7"
+            android:lineSpacingExtra="5sp"
             android:padding="10dp"
             android:text="While measureing the pulse the animation should go on it should say to wait until the heart is measured, when measurement arrives it should be show in the screen  and the animation stops"
             android:textColor="@color/grey"

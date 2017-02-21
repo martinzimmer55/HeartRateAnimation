@@ -27,7 +27,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:text="Tap a piece of the chart, select a date and time and then press ready" />
+            android:lineSpacingExtra="5sp"
+            android:text="Tap a piece of the chart, select a date and time and then press READY."
+            android:textColor="@color/grey" />
 
         <ImageView
             android:id="@+id/imageView2"

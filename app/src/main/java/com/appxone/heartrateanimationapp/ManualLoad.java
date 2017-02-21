@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.appxone.heartrateanimationapp.FrameUtils.MyActivity;
+import com.appxone.heartrateanimationapp.Utils.FontNames;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -65,6 +66,11 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
         time = (TextView) findViewById(R.id.time);
         ready = (ImageView) findViewById(R.id.ready);
         t1 = (TextView) findViewById(R.id.t1);
+
+        day.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
+        time.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
+        t1.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
+
         mChart.setUsePercentValues(true);
         mChart.getDescription().setEnabled(false);
 
@@ -244,9 +250,9 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
 
     void setReadyAllowed() {
         if (isChartSelected && isTimeSelected && isDateSelected)
-            ready.setImageResource(R.drawable.manual_ready_green_btn);
+            ready.setBackgroundResource(R.drawable.manual_ready_green_btn);
         else
-            ready.setImageResource(R.drawable.manual_ready_grey_btn);
+            ready.setBackgroundResource(R.drawable.manual_ready_grey_btn);
     }
 
     public void setHeader(String header_title) {
@@ -261,7 +267,7 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
         title = (TextView) mCustomView.findViewById(R.id.textTitle);
         ImageView backButton = (ImageView) mCustomView.findViewById(R.id.backButton);
         backButton.setVisibility(View.VISIBLE);
-//        title.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_BEBAS));
+        title.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
         title.setText(header_title);
 //        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.header));
         //to display custom layout with same BG color

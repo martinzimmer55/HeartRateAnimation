@@ -13,13 +13,13 @@
         android:layout_margin="10dp"
         android:background="#DDE2E8"
         android:orientation="vertical"
-        android:weightSum="3">
+        android:weightSum="2">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-android:layout_marginBottom="1dp"
+            android:layout_marginBottom="1dp"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:weightSum="2">
@@ -53,7 +53,8 @@ android:layout_marginBottom="1dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Manual Load" />
+                        android:text="Manual Load"
+                        android:textColor="@color/grey" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -85,7 +86,8 @@ android:layout_marginBottom="1dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Assisted Load" />
+                        android:text="Assisted Load"
+                        android:textColor="@color/grey" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -94,8 +96,6 @@ android:layout_marginBottom="1dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-
-
             android:layout_weight="1"
             android:orientation="horizontal"
             android:weightSum="2">
@@ -130,7 +130,8 @@ android:layout_marginBottom="1dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Bracelet Demo" />
+                        android:text="Bracelet Demo"
+                        android:textColor="@color/grey" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -163,7 +164,8 @@ android:layout_marginBottom="1dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Fingerprint Read Demo" />
+                        android:text="Fingerprint Read Demo"
+                        android:textColor="@color/grey" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

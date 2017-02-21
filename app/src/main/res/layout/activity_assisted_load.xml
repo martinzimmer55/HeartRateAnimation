@@ -16,15 +16,16 @@
 
         <TextView
             android:id="@+id/t1"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select the desired treatment, confirm the data and tap Start to begin the assisted load." />
+            android:lineSpacingExtra="5sp"
+            android:text="Select the desired treatment, confirm the data and tap Start to begin the assisted load."
+            android:textColor="@color/grey" />
 
         <Spinner
             android:id="@+id/spinner_treatment"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="303dp"
+            android:layout_height="45dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="50dp"
             android:layout_marginTop="40dp"
@@ -35,6 +36,199 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/manual_divider" />
+
+        <TextView
+            android:id="@+id/t3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Data from selected treatment"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/treatment_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/t4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Dr. in charge:"
+                    android:textColor="@color/grey" />
+
+                <TextView
+                    android:id="@+id/incharge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:text="Physician"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/t5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Dr. speciality 1:"
+                    android:textColor="@color/grey" />
+
+                <TextView
+                    android:id="@+id/spec1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:text="Cardiologist"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/t6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Dr. speciality 2:"
+                    android:textColor="@color/grey" />
+
+                <TextView
+                    android:id="@+id/spec2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:text="Surgeons"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/t7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Dr. speciality 3:"
+                    android:textColor="@color/grey" />
+
+                <TextView
+                    android:id="@+id/spec3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:text="Psychiatrist"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/t8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Start date of treatment:"
+                    android:textColor="@color/grey" />
+
+                <TextView
+                    android:id="@+id/startdate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:text="Monday 02:30am"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/t9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="End date of treatment:"
+                    android:textColor="@color/grey" />
+
+                <TextView
+                    android:id="@+id/enddate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:text="Tuesday 02:30am"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/t10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Treatment following:"
+                    android:textColor="@color/grey" />
+
+                <TextView
+                    android:id="@+id/treatfollow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:text="Yes"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <ImageView

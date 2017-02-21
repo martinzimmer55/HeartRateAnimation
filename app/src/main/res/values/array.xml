@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="treatment">
+        <item>Select Treatment</item>
+        <item>Treatment 1</item>
+        <item>Treatment 2</item>
+        <item>Treatment 3</item>
+        <item>Treatment 4</item>
+    </string-array>
+
+
+</resources>

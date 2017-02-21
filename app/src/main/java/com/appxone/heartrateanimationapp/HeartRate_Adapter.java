@@ -46,7 +46,10 @@ public class HeartRate_Adapter extends MyBaseAdapter {
             ViewHolder viewHolder1 = new ViewHolder();
             viewHolder1.datetime = (TextView) convertView.findViewById(R.id.datetime);
             viewHolder1.heartrate = (TextView) convertView.findViewById(R.id.heartrate);
-//            viewHolder1.treasure.setTypeface(Typeface.createFromAsset(act.getAssets(), FontNames.FONT_BEBAS));
+            viewHolder1.bpm = (TextView) convertView.findViewById(R.id.bpm);
+            viewHolder1.bpm.setTypeface(Typeface.createFromAsset(act.getAssets(), FontNames.FONT_ROMAN));
+            viewHolder1.datetime.setTypeface(Typeface.createFromAsset(act.getAssets(), FontNames.FONT_ROMAN));
+            viewHolder1.heartrate.setTypeface(Typeface.createFromAsset(act.getAssets(), FontNames.FONT_BOLD_COND));
             convertView.setTag(viewHolder1);
         }
         viewHolder = (ViewHolder) convertView.getTag();
@@ -56,7 +59,7 @@ public class HeartRate_Adapter extends MyBaseAdapter {
     }
 
     private static class ViewHolder {
-        TextView datetime, heartrate;
+        TextView datetime, heartrate, bpm;
     }
 
 

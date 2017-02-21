@@ -1,5 +1,6 @@
 package com.appxone.heartrateanimationapp;
 
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -12,10 +13,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appxone.heartrateanimationapp.FrameUtils.MyActivity;
+import com.appxone.heartrateanimationapp.Utils.FontNames;
 
 public class MeasuringHeartRate extends MyActivity {
     ImageView imageView;
     AnimationDrawable anim;
+    boolean activityFinished;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,9 @@ public class MeasuringHeartRate extends MyActivity {
         setHeader("Measuring Heart Rate");
         imageView = (ImageView) findViewById(R.id.image);
         imageView.setBackgroundResource(R.drawable.heart);
+        TextView t1 = (TextView) findViewById(R.id.t1);
+
+        t1.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
         anim = (AnimationDrawable) imageView.getBackground();
         imageView.setVisibility(View.VISIBLE);
         anim.start();
@@ -32,8 +38,10 @@ public class MeasuringHeartRate extends MyActivity {
             public void run() {
                 anim.stop();
                 imageView.setVisibility(View.GONE);
-                startMyActivity(Result.class);
-                finish();
+                if (!activityFinished) {
+                    startMyActivity(Result.class);
+                    finish();
+                }
             }
         }, 6000);
 
@@ -57,7 +65,7 @@ public class MeasuringHeartRate extends MyActivity {
         title = (TextView) mCustomView.findViewById(R.id.textTitle);
         ImageView backButton = (ImageView) mCustomView.findViewById(R.id.backButton);
         backButton.setVisibility(View.VISIBLE);
-//        title.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_BEBAS));
+        title.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
         title.setText(header_title);
 //        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.header));
         //to display custom layout with same BG color
@@ -70,4 +78,9 @@ public class MeasuringHeartRate extends MyActivity {
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        activityFinished = true;
+    }
 }

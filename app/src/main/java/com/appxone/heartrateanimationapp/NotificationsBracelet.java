@@ -1,5 +1,6 @@
 package com.appxone.heartrateanimationapp;
 
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appxone.heartrateanimationapp.FrameUtils.MyActivity;
+import com.appxone.heartrateanimationapp.Utils.FontNames;
 
 public class NotificationsBracelet extends MyActivity {
 
@@ -43,7 +45,7 @@ public class NotificationsBracelet extends MyActivity {
         title = (TextView) mCustomView.findViewById(R.id.textTitle);
         ImageView backButton = (ImageView) mCustomView.findViewById(R.id.backButton);
         backButton.setVisibility(View.VISIBLE);
-//        title.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_BEBAS));
+        title.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
         title.setText(header_title);
 //        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.header));
         //to display custom layout with same BG color
