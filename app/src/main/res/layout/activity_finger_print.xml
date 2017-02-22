@@ -7,18 +7,18 @@
     tools:context="com.appxone.heartrateanimationapp.FingerPrint">
 
     <ImageView
-        android:id="@+id/finger"
+        android:id="@+id/reset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/reset_btn_selector"
-        android:onClick="finger" />
+        android:onClick="reset" />
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/finger"
+        android:layout_above="@+id/reset"
         android:padding="10dp"
         android:scrollbars="none">
 

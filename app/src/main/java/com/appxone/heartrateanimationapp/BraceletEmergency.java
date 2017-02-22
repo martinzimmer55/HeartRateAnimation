@@ -19,6 +19,8 @@ public class BraceletEmergency extends MyActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bracelet_emergency);
         setHeader("Bracelet Emergency");
+
+        getSupportActionBar().setElevation(0.0f);
         TextView t1 = (TextView) findViewById(R.id.t1);
         t1.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
     }

@@ -19,6 +19,7 @@ public class NotificationsBracelet extends MyActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications_bracelet);
         setHeader("Notifications to Bracelet");
+        getSupportActionBar().setElevation(0.0f);
     }
 
     public void vibrate1(View v) {

@@ -1,8 +1,10 @@
 package com.appxone.heartrateanimationapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,6 +31,8 @@ public class AssistedLoad extends MyActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assisted_load);
+
+        getSupportActionBar().setElevation(0.0f);
         setHeader("Assisted Load");
         spinner_treatment = (Spinner) findViewById(R.id.spinner_treatment);
         start = (ImageView) findViewById(R.id.start);
@@ -80,6 +84,7 @@ public class AssistedLoad extends MyActivity {
                     start.setBackgroundResource(R.drawable.assisted_start_grey);
                     treatment_data.setVisibility(View.INVISIBLE);
                     t3.setVisibility(View.INVISIBLE);
+                    setTreatmentValuesBySelection(i);
                 } else {
                     start.setBackgroundResource(R.drawable.assisted_start_green);
                     t3.setVisibility(View.VISIBLE);
@@ -95,8 +100,44 @@ public class AssistedLoad extends MyActivity {
         });
     }
 
-    public void start(View v) {
+    void setTreatmentValuesBySelection(int i) {
+        if (i == 1) {
+            setData("Physician", "Cardiologist", "Surgeons", "Psychiatrist", "Monday 02:30am", "Tuesday 02:30am", "Yes");
+        } else if (i == 2) {
+            setData("Physician", "Cardiologist", "Surgeons", "Psychiatrist", "Monday 02:30am", "Tuesday 02:30am", "Yes");
+        } else if (i == 3) {
+            setData("Physician", "Cardiologist", "Surgeons", "Psychiatrist", "Monday 02:30am", "Tuesday 02:30am", "Yes");
+        } else if (i == 4) {
+            setData("Physician", "Cardiologist", "Surgeons", "Psychiatrist", "Monday 02:30am", "Tuesday 02:30am", "Yes");
+        }
+    }
 
+    public void setData(String inchargeS, String spec1S, String spec2S, String spec3S, String startdateS, String enddateS, String treatfollowS) {
+        incharge.setText(inchargeS);
+        spec1.setText(spec1S);
+        spec2.setText(spec2S);
+        spec3.setText(spec3S);
+        startdate.setText(startdateS);
+        enddate.setText(enddateS);
+        treatfollow.setText(treatfollowS);
+    }
+
+    public void start(View v) {
+        if (spinner_treatment.getSelectedItemPosition() != 0) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(AssistedLoad.this);
+            builder1.setTitle("Message");
+            builder1.setMessage("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton(
+                    "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }
     }
 
     public void back(View v) {
@@ -189,4 +230,6 @@ public class AssistedLoad extends MyActivity {
     public void onTaskComplete(String result, String key) {
 
     }
+
+
 }

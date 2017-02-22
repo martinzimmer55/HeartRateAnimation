@@ -1,5 +1,6 @@
 package com.appxone.heartrateanimationapp;
 
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,18 +15,23 @@ import com.appxone.heartrateanimationapp.FrameUtils.MyActivity;
 import com.appxone.heartrateanimationapp.Utils.FontNames;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Result extends MyActivity {
     HeartRate_Adapter adapter;
     ListView list;
     ArrayList<Model_HeartRate> arrayList;
     TextView heart_rate_value;
+    CopyOfDataBaseManager db;
+    String lastHeartRate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         setHeader("Result");
+        getSupportActionBar().setElevation(0.0f);
+        db = new CopyOfDataBaseManager(getApplicationContext());
         list = (ListView) findViewById(R.id.listView);
         heart_rate_value = (TextView) findViewById(R.id.heart_rate_value);
         TextView t1 = (TextView) findViewById(R.id.t1);
@@ -34,12 +40,10 @@ public class Result extends MyActivity {
         t1.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
         t2.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
         heart_rate_value.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_BOLD_COND));
+
         arrayList = new ArrayList<>();
-        arrayList.add(new Model_HeartRate("15th Feb, 2017, 02:12", "72"));
-        arrayList.add(new Model_HeartRate("16th Feb, 2017, 06:24", "80"));
-        arrayList.add(new Model_HeartRate("17th Feb, 2017, 09:59", "89"));
-        arrayList.add(new Model_HeartRate("18th Feb, 2017, 01:32", "65"));
-        arrayList.add(new Model_HeartRate("19th Feb, 2017, 12:45", "69"));
+        getDataFromDB();
+        heart_rate_value.setText(lastHeartRate);
         adapter = new HeartRate_Adapter(Result.this, arrayList);
         list.setAdapter(adapter);
     }
@@ -67,6 +71,26 @@ public class Result extends MyActivity {
         //to display custom layout with same BG color
         ActionBar.LayoutParams layout = new ActionBar.LayoutParams(ActionBar.LayoutParams.FILL_PARENT, ActionBar.LayoutParams.FILL_PARENT);
         getSupportActionBar().setCustomView(mCustomView, layout);
+    }
+
+    public void getDataFromDB() {
+        String q = "SELECT * FROM records";
+        Cursor c = db.selectQuery(q);
+        // for traversing
+        arrayList.clear();
+        if (c.getCount() > 0) {
+            if (c.moveToFirst()) {
+                do {
+                    int id = c.getInt(c.getColumnIndex("id"));
+                    String heartrate = c.getString(c.getColumnIndex("heartrate"));
+                    String datetime = c.getString(c.getColumnIndex("datetime"));
+                    arrayList.add(new Model_HeartRate(id, datetime, heartrate));
+                    lastHeartRate = heartrate;
+                } while (c.moveToNext());
+            }
+
+        }
+        Collections.reverse(arrayList);
     }
 
     @Override

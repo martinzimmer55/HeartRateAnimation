@@ -5,10 +5,20 @@ package com.appxone.heartrateanimationapp;
  */
 public class Model_HeartRate {
     String datetime, heartrate;
+    int id;
 
-    public Model_HeartRate(String datetime, String heartrate) {
+    public Model_HeartRate(int id, String datetime, String heartrate) {
+        this.id = id;
         this.datetime = datetime;
         this.heartrate = heartrate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDatetime() {

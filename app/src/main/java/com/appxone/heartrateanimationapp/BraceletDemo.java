@@ -19,6 +19,8 @@ public class BraceletDemo extends MyActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bracelet_demo);
         setHeader("Bracelet Demo");
+
+        getSupportActionBar().setElevation(0.0f);
         TextView hearrate = (TextView) findViewById(R.id.hearrate);
         TextView notification = (TextView) findViewById(R.id.notification);
         TextView bracelet = (TextView) findViewById(R.id.bracelet);

@@ -14,12 +14,14 @@ import com.appxone.heartrateanimationapp.Utils.FontNames;
 
 public class FingerPrint extends MyActivity {
     TextView name, address, age, datetime, loc;
+    ImageView scan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finger_print);
         setHeader("Fingerprint Demo");
+        getSupportActionBar().setElevation(0.0f);
         TextView t1 = (TextView) findViewById(R.id.t1);
         TextView t2 = (TextView) findViewById(R.id.t2);
         TextView t3 = (TextView) findViewById(R.id.t3);
@@ -27,7 +29,7 @@ public class FingerPrint extends MyActivity {
         TextView t5 = (TextView) findViewById(R.id.t5);
         TextView t6 = (TextView) findViewById(R.id.t6);
         TextView t7 = (TextView) findViewById(R.id.t7);
-
+        scan = (ImageView) findViewById(R.id.scan);
 
         name = (TextView) findViewById(R.id.name);
         address = (TextView) findViewById(R.id.address);
@@ -47,9 +49,22 @@ public class FingerPrint extends MyActivity {
         datetime.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
         loc.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
 
+//        Setting users image and text
+        setImageAndTexts("Steven Smith", "Block A, Gulistan e Joha", "25 years", "20/02/2017 04:30pm", "Street University Road", R.drawable.fingerprint_demo_icon);
+
     }
 
-    public void finger(View v) {
+    public void setImageAndTexts(String nameS, String addressS, String ageS, String datetimeS, String locS, Integer image) {
+        name.setText(nameS);
+        address.setText(addressS);
+        age.setText(ageS);
+        datetime.setText(datetimeS);
+        loc.setText(locS);
+        scan.setImageResource(image);
+
+    }
+
+    public void reset(View v) {
 
     }
 

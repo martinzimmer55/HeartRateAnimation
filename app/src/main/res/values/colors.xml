@@ -5,7 +5,7 @@
     <color name="colorPrimaryRed">#d73131</color>
     <color name="colorPrimaryDarkRed">#cb2727</color>
     <color name="colorAccent">#03A9F4</color>
-
+    <color name="lightRed">#E23C3C</color>
     <color name="bgcolor">#FFF</color>
     <color name="white">#FFF</color>
     <color name="black">#000</color>

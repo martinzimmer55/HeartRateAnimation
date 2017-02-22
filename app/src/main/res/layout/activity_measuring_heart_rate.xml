@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="8"
-            android:background="@color/colorPrimaryRed"
+            android:background="@color/lightRed"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -27,6 +27,14 @@
                 android:layout_height="175dp"
                 android:layout_gravity="center"
                 android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/initimage"
+                android:layout_width="175dp"
+                android:layout_height="175dp"
+                android:layout_gravity="center"
+                android:onClick="startAnim"
+                android:src="@drawable/h1" />
         </LinearLayout>
 
         <TextView

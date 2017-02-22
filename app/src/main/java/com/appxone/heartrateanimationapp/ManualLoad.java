@@ -21,6 +21,7 @@ import android.widget.TimePicker;
 
 import com.appxone.heartrateanimationapp.FrameUtils.MyActivity;
 import com.appxone.heartrateanimationapp.Utils.FontNames;
+import com.appxone.heartrateanimationapp.Utils.PSStrings;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -35,6 +36,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class ManualLoad extends MyActivity implements OnChartValueSelectedListener {
@@ -49,18 +51,21 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
             "", "", "", "", "", "", "", "",
             "", ""
     };
+    int selectedChartItem;
     Calendar myCalendar;
     DatePickerDialog.OnDateSetListener date;
     TimePickerDialog.OnTimeSetListener timeO;
     TextView day, time, t1;
     boolean isDateSelected, isTimeSelected, isChartSelected;
     ImageView ready;
+    HashMap<Float, Integer> myMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_load);
         setHeader("Manual Load");
+        getSupportActionBar().setElevation(0.0f);
         mChart = (PieChart) findViewById(R.id.chart);
         day = (TextView) findViewById(R.id.day);
         time = (TextView) findViewById(R.id.time);
@@ -131,6 +136,18 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
         };
 //        mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
 
+        myMap = new HashMap<Float, Integer>();
+        myMap.put(0.0f, 10);
+        myMap.put(1.0f, 20);
+        myMap.put(2.0f, 30);
+        myMap.put(3.0f, 40);
+        myMap.put(4.0f, 50);
+        myMap.put(5.0f, 60);
+        myMap.put(6.0f, 70);
+        myMap.put(7.0f, 80);
+        myMap.put(8.0f, 90);
+        myMap.put(9.0f, 100);
+
     }
 
     public void day(View v) {
@@ -146,7 +163,13 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
     }
 
     public void ready(View v) {
+        if (isChartSelected && isTimeSelected && isDateSelected) {
+//            All three values are fetched below
+//            selectedChartItem
+//            day.getText().toString();
+//            time.getText().toString();
 
+        }
     }
 
     public void back(View v) {
@@ -289,6 +312,10 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
         Log.i("VAL SELECTED",
                 "Value: " + e.getY() + ", index: " + h.getX()
                         + ", DataSet index: " + h.getDataSetIndex());
+//        selectedChartItem = (int) (h.getX() + 1.0f);
+        selectedChartItem = myMap.get(h.getX());
+        log(selectedChartItem, PSStrings.showLog);
+
     }
 
     @Override

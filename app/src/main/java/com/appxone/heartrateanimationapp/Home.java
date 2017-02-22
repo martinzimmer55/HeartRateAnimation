@@ -18,6 +18,7 @@ public class Home extends MyActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setHeader("Home");
+        getSupportActionBar().setElevation(0.0f);
         TextView t1 = (TextView) findViewById(R.id.t1);
         TextView t2 = (TextView) findViewById(R.id.t2);
         TextView t3 = (TextView) findViewById(R.id.t3);
