@@ -28,16 +28,9 @@
             android:layout_height="0dp"
             android:layout_weight="8"
             android:lineSpacingExtra="5sp"
-            android:text="Please wait until the Bracelet button is pressed...\n\nWhen that happen, below will be show a text saying that the emergency button has been pressed.\n\nWe have then the possibility to change (reset) and wait again, or go back."
+            android:text="Estableciendo comunicacion con el dispositivo...\n\nCuando se presione el botón de alerta en el brazalete, se abrira una nueva ventana con los datos de la emergencia."
             android:textColor="@color/grey"
             android:textSize="16sp" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/reset"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/reset_btn_selector"
-        android:onClick="reset" />
 </RelativeLayout>
