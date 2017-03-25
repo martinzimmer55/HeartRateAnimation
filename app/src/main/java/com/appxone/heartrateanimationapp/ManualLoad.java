@@ -2,9 +2,13 @@ package com.appxone.heartrateanimationapp;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -32,6 +36,9 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,7 +46,15 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
+
 public class ManualLoad extends MyActivity implements OnChartValueSelectedListener {
+
+    private static String url_crear_comando = "http://pillsandcare.esy.es/pillsconnect/write_command.php";
+    JSONParser jParser = new JSONParser();
+    String dia = "";
+    String hora = "";
+    int slot = 0;
+
     private PieChart mChart;
     //    protected String[] mParties = new String[] {
 //            "Party A", "Party B", "Party C", "Party D", "Party E", "Party F", "Party G", "Party H",
@@ -159,7 +174,7 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
     public void time(View v) {
         new TimePickerDialog(ManualLoad.this, timeO, myCalendar
                 .get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE),
-                false).show();
+                true).show();
     }
 
     public void ready(View v) {
@@ -168,6 +183,10 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
 //            selectedChartItem
 //            day.getText().toString();
 //            time.getText().toString();
+            dia = day.getText().toString();
+            hora = time.getText().toString();
+            slot = selectedChartItem;
+            new Posicionar().execute();
 
         }
     }
@@ -188,8 +207,9 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
     private void updateLabelTime() {
 
         isTimeSelected = true;
-        String myFormat = "hh:mm aaa"; //In which you need put here
-//        String myFormat = "EEEE"; //In which you need put here
+        //String myFormat = "hh:mm aaa"; //In which you need put here
+        String myFormat = "H:MM "; //In which you need put here
+       // String myFormat = "EEEE"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         time.setText(sdf.format(myCalendar.getTime()));
         setReadyAllowed();
@@ -323,4 +343,35 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
         isChartSelected = false;
         setReadyAllowed();
     }
+
+    class Posicionar extends AsyncTask<String, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+        protected String doInBackground(String... args) {
+            HashMap<String, String> paramsComando = new HashMap<String, String>();
+            paramsComando.put("cmd", "FILL_SLOT");
+            String argumentos = slot + "," + dia + "," + hora;
+            paramsComando.put("args", argumentos);
+            paramsComando.put("pcid", "1");
+            try {
+                JSONObject jsonWriteCommand = jParser.makeHttpRequest(url_crear_comando, "GET", paramsComando);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+        protected void onPostExecute(String file_url) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                }
+            });
+        }
+    }
+
+
+
+
 }
