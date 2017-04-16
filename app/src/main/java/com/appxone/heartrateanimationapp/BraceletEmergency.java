@@ -66,8 +66,10 @@ public class BraceletEmergency extends MyActivity {
     }
 
     public void back(View v) {
+        Intent intent = new Intent(BraceletEmergency.this, BraceletDemo.class);
         terminar = 1;
         finish();
+        startActivity(intent);
     }
 
     public void setHeader(String header_title) {

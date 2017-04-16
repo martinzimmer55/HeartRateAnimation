@@ -36,6 +36,9 @@
             android:name=".AssistedLoad"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".AssistedLoadLoading"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".BraceletDemo"
             android:screenOrientation="portrait" />
         <activity

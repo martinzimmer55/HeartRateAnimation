@@ -105,7 +105,10 @@ public class MeasuringHeartRate extends MyActivity {
     }
 
     public void back(View v) {
+        Intent intent = new Intent(MeasuringHeartRate.this, BraceletDemo.class);
+        terminar = 1;
         finish();
+        startActivity(intent);
     }
 
     public void setHeader(String header_title) {

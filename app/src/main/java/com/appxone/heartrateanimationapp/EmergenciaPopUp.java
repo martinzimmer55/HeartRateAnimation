@@ -61,7 +61,9 @@ public class EmergenciaPopUp  extends MyActivity {
     }
 
     public void back(View v) {
+        Intent intent = new Intent(EmergenciaPopUp.this, BraceletDemo.class);
         finish();
+        startActivity(intent);
     }
 
     public void setHeader(String header_title) {

@@ -2,6 +2,7 @@ package com.appxone.heartrateanimationapp;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -23,9 +24,11 @@ import com.appxone.heartrateanimationapp.Utils.FontNames;
 public class AssistedLoad extends MyActivity {
     String[] treatment_array;
     Spinner spinner_treatment;
-    TextView incharge, spec1, spec2, spec3, startdate, enddate, treatfollow;
+    TextView incharge, spec1, spec2, spec3, startdate, enddate, treatfollow, spec4;
     ImageView start;
     LinearLayout treatment_data;
+    int tomas = 1;
+    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +60,7 @@ public class AssistedLoad extends MyActivity {
         spec3 = (TextView) findViewById(R.id.spec3);
         startdate = (TextView) findViewById(R.id.startdate);
         enddate = (TextView) findViewById(R.id.enddate);
-        treatfollow = (TextView) findViewById(R.id.treatfollow);
-
+        spec4 = (TextView) findViewById(R.id.spec4);
 
         t1.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
         t3.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
@@ -74,9 +76,9 @@ public class AssistedLoad extends MyActivity {
         spec1.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
         spec2.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
         spec3.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
+        spec4.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
         startdate.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
         enddate.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
-        treatfollow.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
         spinner_treatment.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -102,42 +104,70 @@ public class AssistedLoad extends MyActivity {
 
     void setTreatmentValuesBySelection(int i) {
         if (i == 1) {
-            setData("Physician", "Cardiologist", "Surgeons", "Psychiatrist", "Monday 02:30am", "Tuesday 02:30am", "Yes");
+            setData("Perez", "Cardiologia", "Furosemide", "50 mg", "12 horas", "Lunes 8:00", "Miercoles 8:00");
+            tomas = 6;
         } else if (i == 2) {
-            setData("Physician", "Cardiologist", "Surgeons", "Psychiatrist", "Monday 02:30am", "Tuesday 02:30am", "Yes");
+            setData("Lopez", "Pediatria", "Amoxidal", "250 mg", "8 horas", "Lunes 9:30", "Miercoles 9:30");
+            tomas = 9;
         } else if (i == 3) {
-            setData("Physician", "Cardiologist", "Surgeons", "Psychiatrist", "Monday 02:30am", "Tuesday 02:30am", "Yes");
+            setData("Rodriguez", "Psiquiatria", "Ativan", "2 mg", "12 horas", "Jueves 7:30", "Sabado 7:30");
+            tomas = 6;
         } else if (i == 4) {
-            setData("Physician", "Cardiologist", "Surgeons", "Psychiatrist", "Monday 02:30am", "Tuesday 02:30am", "Yes");
+            setData("Gonzalez", "Dermatologia", "Doxiciclina", "100 mg" , "24 horas", "Viernes 12:00", "Domingo 12:00");
+            tomas = 3;
         }
     }
 
-    public void setData(String inchargeS, String spec1S, String spec2S, String spec3S, String startdateS, String enddateS, String treatfollowS) {
+    public void setData(String inchargeS, String spec1S, String spec2S, String spec3S, String spec4S, String startdateS, String enddateS) {
         incharge.setText(inchargeS);
         spec1.setText(spec1S);
         spec2.setText(spec2S);
         spec3.setText(spec3S);
+        spec4.setText(spec4S);
         startdate.setText(startdateS);
         enddate.setText(enddateS);
-        treatfollow.setText(treatfollowS);
     }
 
     public void start(View v) {
         if (spinner_treatment.getSelectedItemPosition() != 0) {
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(AssistedLoad.this);
-            builder1.setTitle("Message");
-            builder1.setMessage("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s");
-            builder1.setCancelable(true);
-            builder1.setPositiveButton(
-                    "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
+            /*while (i < tomas) {
+                sumar();
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(AssistedLoad.this);
+                builder1.setTitle("Carga asistida");
+                builder1.setMessage("Espere a que la compuerta se abra y coloque una pastilla de " + spec2.getText() + " " + spec3.getText() + ". Luego presione Siguiente para continuar.");
+                builder1.setCancelable(true);
+                builder1.setPositiveButton(
+                        "Siguiente",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //posicionar slot y abrir puerta
+                                dialog.cancel();
+                            }
+                        });
+                builder1.setNegativeButton(
+                        "Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //cerrar puerta
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }*/
+            Intent intent = new Intent(AssistedLoad.this, AssistedLoadLoading.class);
+            intent.putExtra("medicamento", spec2.getText());
+            intent.putExtra("dosis", spec3.getText());
+            intent.putExtra("tomas", tomas);
+            startActivity(intent);
         }
+    }
+
+    public void sumar(){
+        i++;
+    }
+    public void cancelarCarga(){
+        i = tomas + 1;
     }
 
     public void back(View v) {

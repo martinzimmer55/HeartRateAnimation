@@ -1,5 +1,6 @@
 package com.appxone.heartrateanimationapp;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -44,7 +45,9 @@ public class BraceletDemo extends MyActivity {
 
 
     public void back(View v) {
+        Intent intent = new Intent(BraceletDemo.this, Home.class);
         finish();
+        startActivity(intent);
     }
 
     public void setHeader(String header_title) {

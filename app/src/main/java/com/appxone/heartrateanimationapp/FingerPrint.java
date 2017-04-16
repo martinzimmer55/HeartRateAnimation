@@ -120,7 +120,6 @@ public class FingerPrint extends MyActivity {
         datetime.setText(datetimeS);
         loc.setText(locS);
         scan.setImageResource(image);
-
     }
 
     public void reset(View v) {
@@ -205,7 +204,7 @@ public class FingerPrint extends MyActivity {
                         nombre = p.getString(TAG_NOMBRE);
                         direccion = p.getString(TAG_DIRECCION);
                         edad = p.getString(TAG_EDAD);
-                    }
+                                            }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -225,7 +224,21 @@ public class FingerPrint extends MyActivity {
                 public void run() {
                     if (nombre.compareTo("") != 0) {
                         //mostrar datos
-                        setImageAndTexts(nombre, direccion, edad, fecha, lugar, R.drawable.fingerprint_demo_icon);
+                        //setImageAndTexts(nombre, direccion, edad, fecha, lugar, R.drawable.fingerprint_demo_icon);
+                        switch (persona) {
+                            case "1": setImageAndTexts(nombre, direccion, edad, fecha, lugar, R.drawable.rodrigo);
+                                break;
+                            case "2": setImageAndTexts(nombre, direccion, edad, fecha, lugar, R.drawable.robert);
+                                break;
+                            case "3": setImageAndTexts(nombre, direccion, edad, fecha, lugar, R.drawable.lucia);
+                                break;
+                            case "4": setImageAndTexts(nombre, direccion, edad, fecha, lugar, R.drawable.martin);
+                                break;
+                            case "5": setImageAndTexts(nombre, direccion, edad, fecha, lugar, R.drawable.flor);
+                                break;
+                            default: setImageAndTexts(nombre, direccion, edad, fecha, lugar, R.drawable.flor);
+                                break;
+                        }
                     } else {
                         AlertDialog alerta = new AlertDialog.Builder(FingerPrint.this).create();
                         alerta.setTitle("Error al recopilar datos");
