@@ -169,7 +169,7 @@ public class FingerPrint extends MyActivity {
         protected String doInBackground(String... args) {
             //escribo el comando para el lector en la tabla de comandos
             HashMap<String, String> paramsComando = new HashMap<String, String>();
-            paramsComando.put("cmd", "READ_FINGERPRINT");
+            paramsComando.put("cmd", "E");
             paramsComando.put("args", "");
             paramsComando.put("pcid", "1");
             JSONObject jsonWriteCommand = jParser.makeHttpRequest(url_write_command, "POST", paramsComando);
@@ -179,7 +179,7 @@ public class FingerPrint extends MyActivity {
             do {
                 HashMap<String, String> params = new HashMap<String, String>();
                 params.put("pcid", "1");
-                JSONObject jsonMarcas = jParser.makeHttpRequest(url_get_marca, "GET", params);
+                JSONObject jsonMarcas = jParser.makeHttpRequest(url_get_marca, "POST", params);
                 try {
                     success = jsonMarcas.getInt(TAG_SUCCESS);
                     if (success == 1) {

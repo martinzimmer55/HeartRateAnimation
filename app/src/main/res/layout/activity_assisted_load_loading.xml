@@ -28,7 +28,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:lineSpacingExtra="5sp"
-            android:text="Seleccione el slot a cargar, seleccione hora y fecha de la toma y presione READY para continuar."
+            android:text='Espere a que se abra el compartimiento y coloque una pastilla. Luego presione "Ready" para continuar con la siguiente dosis.'
             android:textColor="@color/grey" />
 
         <ImageView
@@ -39,43 +39,6 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/manual_divider" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/manual_select_day_dropdown"
-            android:gravity="center_vertical"
-            android:onClick="day">
-
-            <TextView
-                android:id="@+id/day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:text="Seleccione Dia"
-                android:textColor="@color/black" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/manual_select_time_dropdown"
-            android:gravity="center_vertical"
-            android:onClick="time">
-
-            <TextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:text="Seleccione Hora"
-                android:textColor="@color/black" />
-        </RelativeLayout>
     </LinearLayout>
 
     <ImageView

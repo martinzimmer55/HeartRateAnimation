@@ -1,5 +1,6 @@
 package com.appxone.heartrateanimationapp;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
@@ -7,10 +8,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.IntegerRes;
+import android.support.v7.app.ActionBar;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
@@ -36,120 +36,71 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
+import static android.R.attr.x;
 
-public class ManualLoad extends MyActivity implements OnChartValueSelectedListener {
+
+public class AssistedLoadLoading extends MyActivity implements OnChartValueSelectedListener {
 
     private static String url_crear_comando = "http://pillsandcare.esy.es/pillsconnect/write_command.php";
     JSONParser jParser = new JSONParser();
-    String dia = "";
-    String hora = "";
-    int slot = 0;
+    Integer slot = 0;
+    int puestos = 0;
+    String medicamento = "";
+    String dosis = "";
+    int tomas = 0;
 
     private PieChart mChart;
-    //    protected String[] mParties = new String[] {
-//            "Party A", "Party B", "Party C", "Party D", "Party E", "Party F", "Party G", "Party H",
-//            "Party I", "Party J", "Party K", "Party L", "Party M", "Party N", "Party O", "Party P",
-//            "Party Q", "Party R", "Party S", "Party T", "Party U", "Party V", "Party W", "Party X",
-//            "Party Y", "Party Z"
-//    };
     protected String[] mParties = new String[]{
             "", "", "", "", "", "", "", "",
             "", ""
     };
     int selectedChartItem;
     Calendar myCalendar;
-    DatePickerDialog.OnDateSetListener date;
-    TimePickerDialog.OnTimeSetListener timeO;
-    TextView day, time, t1;
-    boolean isDateSelected, isTimeSelected, isChartSelected;
+    TextView t1;
     ImageView ready;
     HashMap<Float, Integer> myMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manual_load);
-        setHeader("Carga Manual");
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        medicamento = extras.getString("medicamento");
+        dosis = extras.getString("dosis");
+        tomas = extras.getInt("tomas");
+        setContentView(R.layout.activity_assisted_load_loading);
+        setHeader("Carga Asistida");
         getSupportActionBar().setElevation(0.0f);
         mChart = (PieChart) findViewById(R.id.chart);
-        day = (TextView) findViewById(R.id.day);
-        time = (TextView) findViewById(R.id.time);
-        ready = (ImageView) findViewById(R.id.ready);
         t1 = (TextView) findViewById(R.id.t1);
-
-        day.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
-        time.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
-        t1.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
-
         mChart.setUsePercentValues(true);
         mChart.getDescription().setEnabled(false);
-
         mChart.setExtraOffsets(5, 10, 5, 5);
-
         mChart.setDragDecelerationFrictionCoef(0.95f);
-
-//        mChart.setCenterTextTypeface(mTfLight);
-//        mChart.setCenterText(generateCenterSpannableText());
-
         mChart.setDrawHoleEnabled(true);
         mChart.setHoleColor(Color.WHITE);
-
         mChart.setTransparentCircleColor(Color.WHITE);
         mChart.setTransparentCircleAlpha(110);
-
         mChart.setHoleRadius(58f);
         mChart.setTransparentCircleRadius(61f);
-
         mChart.setDrawCenterText(true);
-
         mChart.setRotationAngle(0);
-        // enable rotation of the chart by touch
-        mChart.setRotationEnabled(true);
-        mChart.setHighlightPerTapEnabled(true);
-
-//         mChart.setUnit(" €");
-//         mChart.setDrawUnitsInChart(true);
-
+        // disable rotation of the chart by touch
+        mChart.setRotationEnabled(false);
+        mChart.setHighlightPerTapEnabled(false);
         // add a selection listener
-        mChart.setOnChartValueSelectedListener(this);
-
+        //mChart.setOnChartValueSelectedListener(this);
         setData(10, 100);
-
-        myCalendar = Calendar.getInstance();
-        date = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabelDate();
-
-            }
-
-        };
-        timeO = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
-                myCalendar.set(Calendar.HOUR, hourOfDay);
-                myCalendar.set(Calendar.MINUTE, minute);
-                updateLabelTime();
-
-            }
-        };
 //        mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
+        mChart.highlightValue(slot.floatValue(), 0, false);
 
         myMap = new HashMap<Float, Integer>();
         myMap.put(0.0f, 10);
@@ -163,56 +114,65 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
         myMap.put(8.0f, 90);
         myMap.put(9.0f, 100);
 
-    }
+        ready = (ImageView) findViewById(R.id.ready);
+        setReadyAllowed();
+        t1.setText("Espere a que se abra el compartimiento y coloque una pastilla de " + medicamento + " " + dosis + ". Luego presione \"Ready\" para continuar con la siguiente dosis.");
 
-    public void day(View v) {
-        new DatePickerDialog(ManualLoad.this, date, myCalendar
-                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-    }
-
-    public void time(View v) {
-        new TimePickerDialog(ManualLoad.this, timeO, myCalendar
-                .get(Calendar.HOUR_OF_DAY), myCalendar.get(Calendar.MINUTE),
-                true).show();
+        //****************************************************************************
+        //tirar comando para inicializar el pastillero, ir a la posicion 0 y abrir la compuerta
+        //****************************************************************************
+        //comando ir al slot cero
+        HashMap<String, String> paramsComandoInicial = new HashMap<String, String>();
+        paramsComandoInicial.put("cmd", "D");
+        paramsComandoInicial.put("args", "");
+        paramsComandoInicial.put("pcid", "1");
+        try {
+            JSONObject jsonWriteCommand = jParser.makeHttpRequest(url_crear_comando, "GET", paramsComandoInicial);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        //comando abrir compuerta
+        HashMap<String, String> paramsComandoAbrir = new HashMap<String, String>();
+        paramsComandoAbrir.put("cmd", "H");
+        paramsComandoAbrir.put("args", "");
+        paramsComandoAbrir.put("pcid", "1");
+        try {
+            JSONObject jsonWriteCommand = jParser.makeHttpRequest(url_crear_comando, "GET", paramsComandoAbrir);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void ready(View v) {
-        if (isChartSelected && isTimeSelected && isDateSelected) {
-//            All three values are fetched below
-//            selectedChartItem
-//            day.getText().toString();
-//            time.getText().toString();
-            dia = day.getText().toString();
-            hora = time.getText().toString();
-            slot = selectedChartItem;
+        if (puestos < tomas) {
             new Posicionar().execute();
-            cargaFinalizada();
+            mChart.highlightValue(slot.floatValue() + 1, 0, false);
+        }
+        else {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(AssistedLoadLoading.this);
+            builder1.setTitle("Carga asistida finalizada");
+            builder1.setMessage("Ha finalizado la carga asistida");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton(
+                    "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            new CerrarCompuerta().execute();
+                            Intent intent = new Intent(AssistedLoadLoading.this, Home.class);
+                            dialog.cancel();
+                            finish();
+                            startActivity(intent);
+                        }
+                    });
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
         }
     }
 
     public void back(View v) {
         finish();
-    }
-
-    private void updateLabelDate() {
-        isDateSelected = true;
-        String myFormat = "dd/MM/yy"; //In which you need put here
-//        String myFormat = "EEEE"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        day.setText(sdf.format(myCalendar.getTime()));
-        setReadyAllowed();
-    }
-
-    private void updateLabelTime() {
-
-        isTimeSelected = true;
-        //String myFormat = "hh:mm aaa"; //In which you need put here
-        String myFormat = "H:MM "; //In which you need put here
-       // String myFormat = "EEEE"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        time.setText(sdf.format(myCalendar.getTime()));
-        setReadyAllowed();
     }
 
     private SpannableString generateCenterSpannableText() {
@@ -230,39 +190,14 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
     private void setData(int count, float range) {
 
         float mult = range;
-
         ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
-
-        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
-        // the chart.
         for (int i = 0; i < count; i++) {
-//            entries.add(new PieEntry((float) ((Math.random() * mult) + mult / 5), mParties[i % mParties.length]));
             entries.add(new PieEntry((float) (10.0), mParties[i % mParties.length]));
         }
-
         PieDataSet dataSet = new PieDataSet(entries, "Election Results");
         dataSet.setSliceSpace(0f);
         dataSet.setSelectionShift(15f);
-
-        // add a lot of colors
-
         ArrayList<Integer> colors = new ArrayList<Integer>();
-
-//        for (int c : ColorTemplate.VORDIPLOM_COLORS)
-//            colors.add(c);
-//
-//        for (int c : ColorTemplate.JOYFUL_COLORS)
-//            colors.add(c);
-//
-//        for (int c : ColorTemplate.COLORFUL_COLORS)
-//            colors.add(c);
-//
-//        for (int c : ColorTemplate.LIBERTY_COLORS)
-//            colors.add(c);
-//
-//        for (int c : ColorTemplate.PASTEL_COLORS)
-//            colors.add(c);
-
         colors.add(ColorTemplate.rgb("#3AD8BE"));
         colors.add(ColorTemplate.rgb("#3AA6DD"));
         colors.add(ColorTemplate.rgb("#465FDB"));
@@ -273,29 +208,18 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
         colors.add(ColorTemplate.rgb("#D1B333"));
         colors.add(ColorTemplate.rgb("#A3D83A"));
         colors.add(ColorTemplate.rgb("#5fce48"));
-//        colors.add(ColorTemplate.getHoloBlue());
-
         dataSet.setColors(colors);
-        //dataSet.setSelectionShift(0f);
-
         PieData data = new PieData(dataSet);
         data.setValueFormatter(new PercentFormatter());
         data.setValueTextSize(0f);
         data.setValueTextColor(Color.WHITE);
-//        data.setValueTypeface(mTfLight);  to set fonts
         mChart.setData(data);
-
-        // undo all highlights
         mChart.highlightValues(null);
-
         mChart.invalidate();
     }
 
     void setReadyAllowed() {
-        if (isChartSelected && isTimeSelected && isDateSelected)
-            ready.setBackgroundResource(R.drawable.manual_ready_green_btn);
-        else
-            ready.setBackgroundResource(R.drawable.manual_ready_grey_btn);
+        ready.setBackgroundResource(R.drawable.manual_ready_green_btn);
     }
 
     public void setHeader(String header_title) {
@@ -325,52 +249,64 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
 
     @Override
     public void onValueSelected(Entry e, Highlight h) {
-        isChartSelected = true;
         setReadyAllowed();
         if (e == null)
             return;
         Log.i("VAL SELECTED",
                 "Value: " + e.getY() + ", index: " + h.getX()
                         + ", DataSet index: " + h.getDataSetIndex());
-//        selectedChartItem = (int) (h.getX() + 1.0f);
         selectedChartItem = myMap.get(h.getX());
         log(selectedChartItem, PSStrings.showLog);
-
     }
 
     @Override
     public void onNothingSelected() {
-        isChartSelected = false;
         setReadyAllowed();
     }
 
     class Posicionar extends AsyncTask<String, String, String> {
-        //primero tengo que posicionar en el slot que se precisa y abrir la compuerta
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
         protected String doInBackground(String... args) {
-            HashMap<String, String> paramsComandoPosicionar = new HashMap<String, String>();
-            paramsComandoPosicionar.put("cmd", "A");
-            //String argumentos = slot + "," + dia + "," + hora;
-            String argumentos = "0" + slot/10;
-            paramsComandoPosicionar.put("args", argumentos);
-            paramsComandoPosicionar.put("pcid", "1");
-            try {
-                JSONObject jsonWriteCommand = jParser.makeHttpRequest(url_crear_comando, "GET", paramsComandoPosicionar);
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-            HashMap<String, String> paramsComandoAbrirPuerta = new HashMap<String, String>();
-            paramsComandoAbrirPuerta.put("cmd", "H");
-            paramsComandoAbrirPuerta.put("pcid", "1");
-            try {
-                JSONObject jsonWriteCommand = jParser.makeHttpRequest(url_crear_comando, "GET", paramsComandoAbrirPuerta);
-            }
-            catch (Exception e) {
-                e.printStackTrace();
+            if (puestos < tomas) {// Si todavia queda medicacion por poner
+                // Ya tengo lleno el slot 0, tengo que cerrar compuerta, ir al slot 1, abrir compuerta y quedarme esperando el siguiente medicamento
+                // comando cerrar compuerta
+                HashMap<String, String> paramsComandoCerrar = new HashMap<String, String>();
+                paramsComandoCerrar.put("cmd", "C");
+                paramsComandoCerrar.put("args", "");
+                paramsComandoCerrar.put("pcid", "1");
+                try {
+                    JSONObject jsonWriteCommand = jParser.makeHttpRequest(url_crear_comando, "GET", paramsComandoCerrar);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+                puestos ++;
+                slot ++;
+                //comando ir al slot siguiente
+                HashMap<String, String> paramsComandoSiguiente = new HashMap<String, String>();
+                paramsComandoSiguiente.put("cmd", "A");
+                paramsComandoSiguiente.put("args", "0" + slot.toString());
+                paramsComandoSiguiente.put("pcid", "1");
+                try {
+                    JSONObject jsonWriteCommand = jParser.makeHttpRequest(url_crear_comando, "GET", paramsComandoSiguiente);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //comando abrir compuerta
+                HashMap<String, String> paramsComandoAbrir = new HashMap<String, String>();
+                paramsComandoAbrir.put("cmd", "H");
+                paramsComandoAbrir.put("args", "");
+                paramsComandoAbrir.put("pcid", "1");
+                try {
+                    JSONObject jsonWriteCommand = jParser.makeHttpRequest(url_crear_comando, "GET", paramsComandoAbrir);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             return null;
         }
@@ -381,43 +317,26 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
             });
         }
     }
-    public void cargaFinalizada(){
-        android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(ManualLoad.this);
-        builder1.setTitle("Carga manual");
-        builder1.setMessage("Espere a que se abra el compartimiento y coloque la medicacion. Cuando haya terminado, presione OK para cerrar el compartimiento y finalizar la carga manual.");
-        builder1.setCancelable(true);
-        builder1.setPositiveButton(
-                "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        new CerrarCompuerta().execute();
-                        Intent intent = new Intent(ManualLoad.this, Home.class);
-                        dialog.cancel();
-                        finish();
-                        startActivity(intent);
-                    }
-                });
-        android.app.AlertDialog alert11 = builder1.create();
-        alert11.show();
-    }
+
     class CerrarCompuerta extends AsyncTask<String, String, String> {
         //primero tengo que posicionar en el slot que se precisa y abrir la compuerta
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
+
         protected String doInBackground(String... args) {
             HashMap<String, String> paramsComandoCerrarPuerta = new HashMap<String, String>();
             paramsComandoCerrarPuerta.put("cmd", "C");
             paramsComandoCerrarPuerta.put("pcid", "1");
             try {
                 JSONObject jsonWriteCommand = jParser.makeHttpRequest(url_crear_comando, "GET", paramsComandoCerrarPuerta);
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
         }
+
         protected void onPostExecute(String file_url) {
             runOnUiThread(new Runnable() {
                 public void run() {
@@ -425,9 +344,6 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
             });
         }
     }
-
-
-
 
 
 }

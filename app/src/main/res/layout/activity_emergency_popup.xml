@@ -8,19 +8,28 @@
     tools:context="com.appxone.heartrateanimationapp.BraceletEmergency">
 
     <ImageView
+        android:id="@+id/call"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/scrollView"
+        android:onClick="call"
+        app:srcCompat="@drawable/alert_call_red_btn" />
+
+    <ImageView
         android:id="@+id/reset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/reset_btn_selector"
-        android:onClick="reset"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@drawable/reset_btn_selector"
+        android:onClick="reset" />
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/reset"
+        android:layout_height="410dp"
         android:padding="10dp"
         android:scrollbars="none">
 
@@ -32,12 +41,11 @@
 
             <ImageView
                 android:id="@+id/emergencia"
-                android:layout_width="match_parent"
-                android:layout_height="178dp"
+                android:layout_width="286dp"
+                android:layout_height="113dp"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="40dp"
                 android:src="@drawable/bracelet_emergency_icon" />
-
 
 
             <TextView
@@ -139,6 +147,7 @@
                         android:text=""
                         android:textColor="@color/black" />
                 </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

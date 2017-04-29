@@ -158,6 +158,7 @@ public class BraceletEmergency extends MyActivity {
                         intent.putExtra("nombre", nombre);
                         intent.putExtra("fecha", fecha);
                         intent.putExtra("lugar", lugar);
+                        intent.putExtra("telefono", telefono);
                         startActivity(intent);
                     }
                 }

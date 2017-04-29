@@ -36,7 +36,7 @@ public class AssistedLoad extends MyActivity {
         setContentView(R.layout.activity_assisted_load);
 
         getSupportActionBar().setElevation(0.0f);
-        setHeader("Assisted Load");
+        setHeader("Carga Asistida");
         spinner_treatment = (Spinner) findViewById(R.id.spinner_treatment);
         start = (ImageView) findViewById(R.id.start);
         treatment_data = (LinearLayout) findViewById(R.id.treatment_data);
@@ -91,6 +91,7 @@ public class AssistedLoad extends MyActivity {
                     start.setBackgroundResource(R.drawable.assisted_start_green);
                     t3.setVisibility(View.VISIBLE);
                     treatment_data.setVisibility(View.VISIBLE);
+                    setTreatmentValuesBySelection(i);
                 }
 
             }
@@ -130,31 +131,6 @@ public class AssistedLoad extends MyActivity {
 
     public void start(View v) {
         if (spinner_treatment.getSelectedItemPosition() != 0) {
-            /*while (i < tomas) {
-                sumar();
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(AssistedLoad.this);
-                builder1.setTitle("Carga asistida");
-                builder1.setMessage("Espere a que la compuerta se abra y coloque una pastilla de " + spec2.getText() + " " + spec3.getText() + ". Luego presione Siguiente para continuar.");
-                builder1.setCancelable(true);
-                builder1.setPositiveButton(
-                        "Siguiente",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                //posicionar slot y abrir puerta
-                                dialog.cancel();
-                            }
-                        });
-                builder1.setNegativeButton(
-                        "Cancelar",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                //cerrar puerta
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alert11 = builder1.create();
-                alert11.show();
-            }*/
             Intent intent = new Intent(AssistedLoad.this, AssistedLoadLoading.class);
             intent.putExtra("medicamento", spec2.getText());
             intent.putExtra("dosis", spec3.getText());
