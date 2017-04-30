@@ -53,7 +53,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Manual Load"
+                        android:text="Carga Manual"
                         android:textColor="@color/grey" />
                 </LinearLayout>
             </LinearLayout>
@@ -86,7 +86,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Assisted Load"
+                        android:text="Carga Asistida"
                         android:textColor="@color/grey" />
                 </LinearLayout>
             </LinearLayout>
@@ -130,7 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Bracelet Demo"
+                        android:text="Demo Pulsera"
                         android:textColor="@color/grey" />
                 </LinearLayout>
             </LinearLayout>
@@ -164,7 +164,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="Fingerprint Read Demo"
+                        android:text="Demo Huella Digital"
                         android:textColor="@color/grey" />
                 </LinearLayout>
             </LinearLayout>

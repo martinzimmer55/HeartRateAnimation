@@ -2,11 +2,11 @@
 <resources>
 
     <string-array name="treatment">
-        <item>Select Treatment</item>
-        <item>Treatment 1</item>
-        <item>Treatment 2</item>
-        <item>Treatment 3</item>
-        <item>Treatment 4</item>
+        <item>Seleccione un Tratamiento</item>
+        <item>Tratamiento 1</item>
+        <item>Tratamiento 2</item>
+        <item>Tratamiento 3</item>
+        <item>Tratamiento 4</item>
     </string-array>
 
 

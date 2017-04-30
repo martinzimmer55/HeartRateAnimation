@@ -82,7 +82,7 @@ public class AssistedLoad extends MyActivity {
         spinner_treatment.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (treatment_array[i].equalsIgnoreCase("select treatment")) {
+                if (treatment_array[i].equalsIgnoreCase("Seleccione un Tratamiento")) {
                     start.setBackgroundResource(R.drawable.assisted_start_grey);
                     treatment_data.setVisibility(View.INVISIBLE);
                     t3.setVisibility(View.INVISIBLE);

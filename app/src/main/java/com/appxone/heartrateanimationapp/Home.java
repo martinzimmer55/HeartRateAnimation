@@ -17,7 +17,7 @@ public class Home extends MyActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        setHeader("Home");
+        setHeader("Menu Principal");
         getSupportActionBar().setElevation(0.0f);
         TextView t1 = (TextView) findViewById(R.id.t1);
         TextView t2 = (TextView) findViewById(R.id.t2);

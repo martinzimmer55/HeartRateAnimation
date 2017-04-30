@@ -2,6 +2,7 @@ package com.appxone.heartrateanimationapp;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +14,15 @@ import android.widget.TextView;
 import com.appxone.heartrateanimationapp.FrameUtils.MyActivity;
 import com.appxone.heartrateanimationapp.Utils.FontNames;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
 public class BraceletDemo extends MyActivity {
+
+    private static String url_crear_comando = "http://pillsandcare.esy.es/pillsconnect/write_command.php";
+    JSONParser jParser = new JSONParser();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +50,11 @@ public class BraceletDemo extends MyActivity {
 
     public void bracelet(View v) {
         startMyActivity(BraceletEmergency.class);
+    }
+
+    public void openEmergencySlot(View v) {
+        //new PosicionarSlotEmergencia().execute();
+        //new EsperarAperturaPorPulsera().execute();
     }
 
 
@@ -74,4 +88,52 @@ public class BraceletDemo extends MyActivity {
     public void onTaskComplete(String result, String key) {
 
     }
+
+    class PosicionarSlotEmergencia extends AsyncTask<String, String, String> {
+        //primero tengo que posicionar en el slot que se precisa y abrir la compuerta
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+        protected String doInBackground(String... args) {
+            HashMap<String, String> posicionarSlot = new HashMap<String, String>();
+            posicionarSlot.put("cmd", "A");
+            posicionarSlot.put("args", "18");
+            posicionarSlot.put("pcid", "1");
+            HashMap<String, String> abrirSlot = new HashMap<String, String>();
+            abrirSlot.put("cmd", "B");
+            abrirSlot.put("pcid", "1");
+            try {
+                JSONObject jsonWriteCommand = jParser.makeHttpRequest(url_crear_comando, "GET", posicionarSlot);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+        protected void onPostExecute(String file_url) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                }
+            });
+        }
+    }
+
+    class EsperarAperturaPorPulsera extends AsyncTask<String, String, String> {
+        //primero tengo que posicionar en el slot que se precisa y abrir la compuerta
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+        protected String doInBackground(String... args) {
+            return null;
+        }
+        protected void onPostExecute(String file_url) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                }
+            });
+        }
+    }
+
 }
