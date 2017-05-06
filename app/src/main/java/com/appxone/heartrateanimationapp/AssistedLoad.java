@@ -147,7 +147,9 @@ public class AssistedLoad extends MyActivity {
     }
 
     public void back(View v) {
+        Intent intent = new Intent(AssistedLoad.this, Home.class);
         finish();
+        startActivity(intent);
     }
 
     public void setHeader(String header_title) {

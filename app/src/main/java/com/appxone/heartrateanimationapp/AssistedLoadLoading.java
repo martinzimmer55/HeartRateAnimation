@@ -121,28 +121,7 @@ public class AssistedLoadLoading extends MyActivity implements OnChartValueSelec
         //****************************************************************************
         //tirar comando para inicializar el pastillero, ir a la posicion 0 y abrir la compuerta
         //****************************************************************************
-        //comando ir al slot cero
-        HashMap<String, String> paramsComandoInicial = new HashMap<String, String>();
-        paramsComandoInicial.put("cmd", "D");
-        paramsComandoInicial.put("args", "");
-        paramsComandoInicial.put("pcid", "1");
-        try {
-            JSONObject jsonWriteCommand = jParser.makeHttpRequest(url_crear_comando, "GET", paramsComandoInicial);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        //comando abrir compuerta
-        HashMap<String, String> paramsComandoAbrir = new HashMap<String, String>();
-        paramsComandoAbrir.put("cmd", "H");
-        paramsComandoAbrir.put("args", "");
-        paramsComandoAbrir.put("pcid", "1");
-        try {
-            JSONObject jsonWriteCommand = jParser.makeHttpRequest(url_crear_comando, "GET", paramsComandoAbrir);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        new InicializarPosicion().execute();
     }
 
     public void ready(View v) {
@@ -172,7 +151,9 @@ public class AssistedLoadLoading extends MyActivity implements OnChartValueSelec
     }
 
     public void back(View v) {
+        Intent intent = new Intent(AssistedLoadLoading.this, Home.class);
         finish();
+        startActivity(intent);
     }
 
     private SpannableString generateCenterSpannableText() {
@@ -344,6 +325,48 @@ public class AssistedLoadLoading extends MyActivity implements OnChartValueSelec
             });
         }
     }
+
+    class InicializarPosicion extends AsyncTask<String, String, String> {
+        //primero tengo que posicionar en el slot que se precisa y abrir la compuerta
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        protected String doInBackground(String... args) {
+            HashMap<String, String> paramsComandoInicial = new HashMap<String, String>();
+            paramsComandoInicial.put("cmd", "D");
+            paramsComandoInicial.put("args", "");
+            paramsComandoInicial.put("pcid", "1");
+            try {
+                JSONObject jsonWriteCommand = jParser.makeHttpRequest(url_crear_comando, "GET", paramsComandoInicial);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            //comando abrir compuerta
+            HashMap<String, String> paramsComandoAbrir = new HashMap<String, String>();
+            paramsComandoAbrir.put("cmd", "H");
+            paramsComandoAbrir.put("args", "");
+            paramsComandoAbrir.put("pcid", "1");
+            try {
+                JSONObject jsonWriteCommand = jParser.makeHttpRequest(url_crear_comando, "GET", paramsComandoAbrir);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        protected void onPostExecute(String file_url) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                }
+            });
+        }
+    }
+
+
 
 
 }

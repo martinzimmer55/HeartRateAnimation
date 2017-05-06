@@ -130,8 +130,10 @@ public class FingerPrint extends MyActivity {
     }
 
     public void back(View v) {
+        Intent intent = new Intent(FingerPrint.this, Home.class);
         terminar = 1;
         finish();
+        startActivity(intent);
     }
 
     public void setHeader(String header_title) {
@@ -241,8 +243,8 @@ public class FingerPrint extends MyActivity {
                         }
                     } else {
                         AlertDialog alerta = new AlertDialog.Builder(FingerPrint.this).create();
-                        alerta.setTitle("Error al recopilar datos");
-                        alerta.setMessage("Error de comunicacion con el lector, por favor pruebe de nuevo en unos segundos. ");
+                        alerta.setTitle("Error al leer huella");
+                        alerta.setMessage("No se ha detectado una huella valida, por favor pruebe de nuevo en unos segundos. ");
                         alerta.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

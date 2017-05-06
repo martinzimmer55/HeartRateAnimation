@@ -7,25 +7,83 @@
     tools:context="com.appxone.heartrateanimationapp.NotificationsBracelet">
 
 
-    <LinearLayout
+    <Button
+        android:id="@+id/btnA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical">
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/btnB"
+        android:layout_marginTop="24dp"
+        android:onClick="moverAPosicion"
+        android:text="A - Mover a la posicion" />
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:onClick="vibrate1"
-            android:src="@drawable/vibrate1_btn_selector" />
+    <Button
+        android:id="@+id/btnB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnA"
+        android:layout_marginStart="29dp"
+        android:onClick="abrirCompuertaConPulsera"
+        android:text="B - Abrir compuerta con Pulsera" />
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="vibrate2"
-            android:src="@drawable/vibrate2_btn_selector" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/btnC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnB"
+        android:layout_alignStart="@+id/btnB"
+        android:layout_below="@+id/btnB"
+        android:onClick="cerrarCompuerta"
+        android:text="C - Cerrar Compuerta" />
+
+    <Button
+        android:id="@+id/btnD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnB"
+        android:layout_alignStart="@+id/btnC"
+        android:layout_below="@+id/btnC"
+        android:onClick="irPosicionCero"
+        android:text="D - Ir A Posicion 0" />
+
+    <Button
+        android:id="@+id/btnF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnB"
+        android:layout_alignStart="@+id/btnD"
+        android:layout_below="@+id/btnD"
+        android:onClick="registrarHuella"
+        android:text="F - Registrar Huella" />
+
+    <Button
+        android:id="@+id/btnG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnF"
+        android:layout_alignStart="@+id/btnF"
+        android:layout_below="@+id/btnF"
+        android:onClick="borrarHuellas"
+        android:text="G - Borrar Todas Las Huellas" />
+
+    <Spinner
+        android:id="@+id/spinner_slot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnA"
+        android:layout_alignEnd="@+id/btnB"
+        android:layout_alignTop="@+id/btnA"
+        android:layout_toEndOf="@+id/btnA" />
+
+    <Button
+        android:id="@+id/btnH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnG"
+        android:layout_alignStart="@+id/btnG"
+        android:layout_below="@+id/btnG"
+        android:onClick="abrirCompuertaSinPulsera"
+        android:text="H - Abrir Compuerta Sin Pulsera" />
+
 </RelativeLayout>

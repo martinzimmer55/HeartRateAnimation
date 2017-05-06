@@ -192,7 +192,9 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
     }
 
     public void back(View v) {
+        Intent intent = new Intent(ManualLoad.this, Home.class);
         finish();
+        startActivity(intent);
     }
 
     private void updateLabelDate() {
