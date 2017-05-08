@@ -30,7 +30,7 @@ public class NotificationsBracelet extends MyActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications_bracelet);
-        setHeader("Notifications to Bracelet");
+        setHeader("Comandos del Sistema");
         getSupportActionBar().setElevation(0.0f);
 
         spinner = (Spinner)findViewById(R.id.spinner_slot);
@@ -250,7 +250,7 @@ public class NotificationsBracelet extends MyActivity {
 
 
     public void back(View v) {
-        Intent intent = new Intent(NotificationsBracelet.this, Home.class);
+        Intent intent = new Intent(NotificationsBracelet.this, BraceletDemo.class);
         finish();
         startActivity(intent);
     }
@@ -277,6 +277,11 @@ public class NotificationsBracelet extends MyActivity {
 
     @Override
     public void onTaskComplete(String result, String key) {
+
+    }
+
+    @Override
+    public void onBackPressed() {
 
     }
 }

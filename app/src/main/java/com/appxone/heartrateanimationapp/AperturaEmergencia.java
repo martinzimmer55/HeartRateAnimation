@@ -4,9 +4,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,7 +19,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class BraceletDemo extends MyActivity {
+public class AperturaEmergencia extends MyActivity {
 
     private static String url_crear_comando = "http://pillsandcare.esy.es/pillsconnect/write_command.php";
     private static String url_get_respuesta = "http://pillsandcare.esy.es/pillsconnect/get_bracelet_response.php";
@@ -34,46 +33,24 @@ public class BraceletDemo extends MyActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bracelet_demo);
-        setHeader("Demo Pulsera");
-
+        setContentView(R.layout.activity_open_emergency);
+        setHeader("Apertura de slot de emergencia");
         getSupportActionBar().setElevation(0.0f);
-        TextView hearrate = (TextView) findViewById(R.id.hearrate);
-        TextView notification = (TextView) findViewById(R.id.notification);
-        TextView bracelet = (TextView) findViewById(R.id.bracelet);
-
-        hearrate.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
-        notification.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
-        bracelet.setTypeface(Typeface.createFromAsset(getAssets(), FontNames.FONT_ROMAN));
+        openEmergencySlot();
     }
 
-    public void heartrate(View v) {
-        //startMyActivity(MeasuringHeartRate.class);
-        Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.oudmon.bandvt");
-        startActivity(launchIntent);
-    }
 
-    public void notifications(View v) {
-        startMyActivity(NotificationsBracelet.class);
-    }
 
-    public void bracelet(View v) {
-        startMyActivity(BraceletEmergency.class);
-    }
-
-    public void openEmergencySlot(View v) {
-       // TextView txt = (TextView)findViewById(R.id.txtvw1);
-       // txt.setText("Espere que se posicione el slot de emergencia para abrir la compuerta con la pulsera.");
-       // new PosicionarSlotEmergencia().execute();
-       // new EsperarAperturaPorPulsera().execute();
-        Intent intent = new Intent(BraceletDemo.this, AperturaEmergencia.class);
-        //finish();
-        startActivity(intent);
+    public void openEmergencySlot() {
+        //TextView txt = (TextView)findViewById(R.id.txtvw1);
+        //txt.setText("Espere que se posicione el slot de emergencia para abrir la compuerta con la pulsera.");
+        new PosicionarSlotEmergencia().execute();
+        new EsperarAperturaPorPulsera().execute();
     }
 
 
     public void back(View v) {
-        Intent intent = new Intent(BraceletDemo.this, Home.class);
+        Intent intent = new Intent(AperturaEmergencia.this, Home.class);
         finish();
         startActivity(intent);
     }
@@ -133,6 +110,8 @@ public class BraceletDemo extends MyActivity {
             });
         }
     }
+
+
     class EsperarAperturaPorPulsera extends AsyncTask<String, String, String> {
         //primero tengo que posicionar en el slot que se precisa y abrir la compuerta
         @Override
@@ -189,17 +168,18 @@ public class BraceletDemo extends MyActivity {
             });
         }
     }
+
     public void AperturaFinalizada(){
-        android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(BraceletDemo.this);
+        android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(AperturaEmergencia.this);
         builder1.setTitle("Apertura de emergencia");
-        builder1.setMessage("Se ha abierto el slot de emergencia, retire la medicacion y presione OK para cerrar el compartimiento.");
+        builder1.setMessage("Se ha abierto la compuerta al pasar la pulsera, retire la medicacion y presione OK para cerrar.");
         builder1.setCancelable(true);
         builder1.setPositiveButton(
                 "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        new BraceletDemo.CerrarCompuerta().execute();
-                        Intent intent = new Intent(BraceletDemo.this, Home.class);
+                        new AperturaEmergencia.CerrarCompuerta().execute();
+                        Intent intent = new Intent(AperturaEmergencia.this, Home.class);
                         dialog.cancel();
                         finish();
                         startActivity(intent);
@@ -209,15 +189,15 @@ public class BraceletDemo extends MyActivity {
         alert11.show();
     }
     public void AperturaCancelada(){
-        android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(BraceletDemo.this);
+        android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(AperturaEmergencia.this);
         builder1.setTitle("Apertura de emergencia");
-        builder1.setMessage("Se ha cancelado la apertura de emergencia.");
+        builder1.setMessage("No se ha detectado la apertura con la pulsera. Se cancela la apertura de emergencia.");
         builder1.setCancelable(true);
         builder1.setPositiveButton(
                 "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Intent intent = new Intent(BraceletDemo.this, Home.class);
+                        Intent intent = new Intent(AperturaEmergencia.this, Home.class);
                         dialog.cancel();
                         finish();
                         startActivity(intent);

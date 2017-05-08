@@ -240,4 +240,9 @@ public class AssistedLoad extends MyActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
 }

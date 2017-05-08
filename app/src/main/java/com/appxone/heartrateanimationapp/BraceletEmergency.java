@@ -166,5 +166,8 @@ public class BraceletEmergency extends MyActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
 
+    }
 }

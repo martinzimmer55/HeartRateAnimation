@@ -215,6 +215,9 @@ public class MeasuringHeartRate extends MyActivity {
         }
     }
     //**********************************************************
+    @Override
+    public void onBackPressed() {
 
+    }
 
 }

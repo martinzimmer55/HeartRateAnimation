@@ -95,7 +95,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/forward2"
                 android:layout_toRightOf="@+id/logo2"
-                android:text="Comandos Pulsera"
+                android:text="Comandos del Sistema"
                 android:textColor="@color/grey"
                 android:textSize="17sp" />
 

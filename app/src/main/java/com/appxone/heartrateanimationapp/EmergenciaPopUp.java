@@ -116,4 +116,9 @@ public class EmergenciaPopUp  extends MyActivity {
     public void onTaskComplete(String result, String key) {
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

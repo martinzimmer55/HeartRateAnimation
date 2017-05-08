@@ -241,7 +241,7 @@ public class FingerPrint extends MyActivity {
                             default: setImageAndTexts(nombre, direccion, edad, fecha, lugar, R.drawable.flor);
                                 break;
                         }
-                    } else {
+                    } else if (terminar != 1){
                         AlertDialog alerta = new AlertDialog.Builder(FingerPrint.this).create();
                         alerta.setTitle("Error al leer huella");
                         alerta.setMessage("No se ha detectado una huella valida, por favor pruebe de nuevo en unos segundos. ");
@@ -262,7 +262,10 @@ public class FingerPrint extends MyActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
 
+    }
 
 
 }

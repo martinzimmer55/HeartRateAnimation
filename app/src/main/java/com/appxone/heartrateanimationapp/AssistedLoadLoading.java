@@ -366,7 +366,10 @@ public class AssistedLoadLoading extends MyActivity implements OnChartValueSelec
         }
     }
 
+    @Override
+    public void onBackPressed() {
 
+    }
 
 
 }

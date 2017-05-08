@@ -428,7 +428,10 @@ public class ManualLoad extends MyActivity implements OnChartValueSelectedListen
         }
     }
 
+    @Override
+    public void onBackPressed() {
 
+    }
 
 
 
